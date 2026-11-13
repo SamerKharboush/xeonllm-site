@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XeonLLM — local LLMs on Intel Macs with AMD GPUs</title>
+<meta name="description" content="XeonLLM runs modern open language models entirely on your own Intel Mac with an AMD GPU. Native macOS app, Metal acceleration, no cloud, no accounts, no per-token costs.">
+<meta property="og:title" content="XeonLLM — local LLMs on Intel Macs with AMD GPUs">
+<meta property="og:description" content="A native macOS app that runs modern open language models on Intel Macs with AMD GPUs. Metal acceleration, no cloud, no accounts, free and open source.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://samerkharboush.github.io/XeonLLM/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 19 L4 5 L20 19 L20 5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      XeonLLM
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#features">Features</a>
+      <a href="#models">Models</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn ghost" href="https://github.com/SamerKharboush/xeonllm" rel="noopener">GitHub</a>
+      <a class="btn solid" href="https://github.com/SamerKharboush/xeonllm/releases/latest" rel="noopener">Download</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap" id="top">
+    <div class="hero-copy">
+      <p class="eyebrow">Native macOS &middot; Intel x86_64 &middot; AMD GPU</p>
+      <h1>Run large language models on the Mac you already own.</h1>
+      <p class="lede">
+        XeonLLM is a native macOS app that runs modern open models entirely on your own machine.
+        Metal acceleration for AMD graphics, no cloud, no account, nothing to pay per token.
+      </p>
+      <div class="hero-actions">
+        <a class="btn solid big" href="https://github.com/SamerKharboush/xeonllm/releases/latest" rel="noopener">Download for Intel Macs</a>
+        <a class="btn ghost big" href="https://github.com/SamerKharboush/xeonllm" rel="noopener">Read the source</a>
+      </div>
+      <p class="fineprint">Free and open source under GPL-3.0. macOS 14 or later, x86_64 with a discrete AMD GPU.</p>
+    </div>
+
+    <figure class="card hero-card">
+      <div id="hero-stage" class="stage"></div>
+      <figcaption class="hint">
+        <span>Click the machine to load a model &middot; click the person to say hello</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="strip" aria-label="What you get">
+    <div class="wrap strip-in">
+      <span>macOS 14+</span><span aria-hidden="true">·</span>
+      <span>Intel x86_64 + AMD GPU</span><span aria-hidden="true">·</span>
+      <span>OpenAI-compatible server on 127.0.0.1:8080</span><span aria-hidden="true">·</span>
+      <span>No telemetry, no sign-up</span>
+    </div>
+  </section>
+
+  <section id="features" class="wrap section">
+    <h2>Built for one machine: yours</h2>
+    <p class="section-lede">Everything below runs locally. The only thing that leaves your Mac is the model download.</p>
+
+    <ul class="cards">
+      <li class="card pad">
+        <span class="ico" data-ico="chat" aria-hidden="true"></span>
+        <h3>A chat that stays out of the way</h3>
+        <p>Persistent conversations, full Markdown with one-click code copy, live tokens per second, attachments and vision, conversation forking and per-message metrics.</p>
+      </li>
+      <li class="card pad">
+        <span class="ico" data-ico="models" aria-hidden="true"></span>
+        <h3>Models picked for your hardware</h3>
+        <p>The app reads your GPU and RAM, then estimates how each model will actually run before you download it. Curated catalog plus Hugging Face search.</p>
+      </li>
+      <li class="card pad">
+        <span class="ico" data-ico="agent" aria-hidden="true"></span>
+        <h3>Agent tools and MCP</h3>
+        <p>The model can read, edit and run files with per-step permission, run JavaScript in a sandbox, and use tools from Model Context Protocol servers you connect.</p>
+      </li>
+      <li class="card pad">
+        <span class="ico" data-ico="server" aria-hidden="true"></span>
+        <h3>An OpenAI-compatible server</h3>
+        <p>A local endpoint at <code>127.0.0.1:8080</code>, router mode that loads whichever model a request names, and several independent servers at once — one per GPU if you want.</p>
+      </li>
+      <li class="card pad">
+        <span class="ico" data-ico="gpu" aria-hidden="true"></span>
+        <h3>Every GPU you have</h3>
+        <p>Split a model across cards by layer or by tensor, including external GPUs, with weights kept in VRAM. MoE-aware offload sizes itself to the card you own.</p>
+      </li>
+      <li class="card pad">
+        <span class="ico" data-ico="bench" aria-hidden="true"></span>
+        <h3>Measured, not guessed</h3>
+        <p>A built-in benchmark runs prompt and generation tests per configuration and charts them side by side, so you can find the sweet spot for your card.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="models" class="wrap section">
+    <h2>What it actually runs</h2>
+    <p class="section-lede">
+      Measured on a 2021 card — an RX 6700 XT with 12 GB — with the bundled engine, KV f16, <code>pp512</code> and <code>tg128</code>.
+      Your numbers will differ; the app records your own history so you can compare.
+    </p>
+    <div class="card table-card">
+      <table>
+        <caption>Generation and prompt speed, tokens per second</caption>
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">Type</th><th scope="col" class="num">Prompt</th><th scope="col" class="num">Generation</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Llama-3.2-1B Q4_K_M</th><td>dense</td><td class="num">5770</td><td class="num">254</td></tr>
+          <tr><th scope="row">Qwen3-8B Q4_K_M</th><td>dense</td><td class="num">851</td><td class="num">61</td></tr>
+          <tr><th scope="row">gemma-4-12B Q4_K_XL</th><td>dense</td><td class="num">534</td><td class="num">37</td></tr>
+          <tr><th scope="row">gpt-oss-20B Q4_K_M</th><td>MoE, all experts in VRAM</td><td class="num">1305</td><td class="num">94</td></tr>
+          <tr><th scope="row">Qwen3.6-14B-A3B Q5_K_M</th><td>MoE, all experts in VRAM</td><td class="num">1243</td><td class="num">67</td></tr>
+          <tr><th scope="row">Qwen3.6-35B-A3B Q4_K_S</th><td>MoE, <code>--n-cpu-moe 24</code></td><td class="num">475</td><td class="num">29</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Numbers vary with quant, context depth and cooling. Full tables, method and raw rows live in the repository README.</p>
+  </section>
+
+  <section id="pricing" class="wrap section">
+    <h2>Free, and it stays free</h2>
+    <p class="section-lede">One price, none. No account, no seat, no token meter.</p>
+    <div class="card pad price">
+      <div>
+        <p class="price-tag">Free</p>
+        <p class="price-sub">GPL-3.0 open source</p>
+      </div>
+      <ul class="ticks">
+        <li>Everything in the app, all features, no trial</li>
+        <li>Unlimited local models and conversations</li>
+        <li>OpenAI-compatible server for your other tools</li>
+        <li>Your chats never leave the machine</li>
+        <li>Read it, fork it, change it</li>
+      </ul>
+      <a class="btn solid" href="https://github.com/SamerKharboush/xeonllm/releases/latest" rel="noopener">Download the DMG</a>
+    </div>
+  </section>
+
+  <section id="faq" class="wrap section">
+    <h2>Questions people actually ask</h2>
+    <div class="faq">
+      <details>
+        <summary>Does it run on Apple Silicon?</summary>
+        <p>The current build is x86_64 only. On an Apple GPU the AMD-specific Metal work never enters the picture, so an Apple Silicon Mac needs a different build; this fork's fixes target Intel Macs with discrete AMD graphics.</p>
+      </details>
+      <details>
+        <summary>What Mac do I need?</summary>
+        <p>macOS 14 or later on an Intel Mac with a discrete AMD GPU. The machine the fork is measured on is a Mac Pro (Late 2013): Xeon E5-2697 v2, 64 GB of RAM and two FirePro D700. Cards with 8 GB or more are the comfortable range; the app tells you what fits before you download.</p>
+      </details>
+      <details>
+        <summary>Do my chats leave the machine?</summary>
+        <p>No. Inference runs on your GPU and your CPU. The server binds to localhost by default; LAN access is a setting you have to turn on deliberately.</p>
+      </details>
+      <details>
+        <summary>Can I use it from another app?</summary>
+        <p>Yes. It speaks the OpenAI API on <code>127.0.0.1:8080</code>, and router mode loads whichever model each request names, so coding assistants can switch models without a restart.</p>
+      </details>
+      <details>
+        <summary>How big are the models?</summary>
+        <p>From about 1 GB for a 1B model at 4-bit to 11 GB for a 35B mixture-of-experts at 4-bit. The model manager shows a VRAM and RAM estimate for your hardware next to each entry.</p>
+      </details>
+      <details>
+        <summary>Where does the download come from?</summary>
+        <p>GitHub Releases on this repository. Builds are ad-hoc signed rather than notarised, so the first launch means right-clicking the app once and choosing Open.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-in">
+      <h2>Give the old Mac a job again.</h2>
+      <p>Download the DMG, open it, and pick a model. The app works out the rest.</p>
+      <div class="hero-actions">
+        <a class="btn solid big" href="https://github.com/SamerKharboush/xeonllm/releases/latest" rel="noopener">Download XeonLLM</a>
+        <a class="btn ghost big" href="https://github.com/SamerKharboush/xeonllm" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p><strong>XeonLLM</strong> — free software under GPL-3.0. Built for Intel Macs with AMD GPUs.</p>
+    <nav class="foot-links" aria-label="Repository">
+      <a href="https://github.com/SamerKharboush/xeonllm" rel="noopener">Source</a>
+      <a href="https://github.com/SamerKharboush/xeonllm/releases" rel="noopener">Releases</a>
+      <a href="https://github.com/SamerKharboush/xeonllm/blob/main/CHANGELOG.md" rel="noopener">Changelog</a>
+      <a href="https://github.com/SamerKharboush/xeonllm/blob/main/LICENSE" rel="noopener">License</a>
+    </nav>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
