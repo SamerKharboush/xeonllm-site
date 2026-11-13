@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/XeonLLM/',
+  base: '/xeonllm-site/',
   build: { target: 'es2022' },
 });

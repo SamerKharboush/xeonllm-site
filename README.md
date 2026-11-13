@@ -3,7 +3,7 @@
 The marketing site for [XeonLLM](https://github.com/SamerKharboush/xeonllm), a native macOS app that
 runs large language models on Intel Macs with AMD GPUs.
 
-Live: <https://samerkharboush.github.io/XeonLLM/>
+Live: <https://samerkharboush.github.io/xeonllm-site/>
 
 ## What is in here
 
@@ -19,7 +19,7 @@ Live: <https://samerkharboush.github.io/XeonLLM/>
 
 ```sh
 npm install
-npm run dev        # http://localhost:5173/XeonLLM/
+npm run dev        # http://localhost:5173/xeonllm-site/
 npm run build      # typecheck + production build into dist/
 npm run preview    # serve the built site
 ```
