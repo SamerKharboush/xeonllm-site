@@ -54,7 +54,7 @@
         <a class="btn solid big" href="https://github.com/SamerKharboush/xeonllm/releases/latest" rel="noopener">Download for Intel Macs</a>
         <a class="btn ghost big" href="https://github.com/SamerKharboush/xeonllm" rel="noopener">Read the source</a>
       </div>
-      <p class="fineprint">Free and open source under GPL-3.0. macOS 14 or later, x86_64 with a discrete AMD GPU.</p>
+      <p class="fineprint">Version 0.2.0 &middot; <a href="https://github.com/SamerKharboush/xeonllm/releases/tag/v0.2.0" rel="noopener">release notes</a>. Free and open source under GPL-3.0. macOS 14 or later, x86_64 with an AVX CPU and a discrete AMD GPU.</p>
     </div>
 
     <figure class="card hero-card">
@@ -107,7 +107,7 @@
       <li class="card pad">
         <span class="ico" data-ico="bench" aria-hidden="true"></span>
         <h3>Measured, not guessed</h3>
-        <p>A built-in benchmark runs prompt and generation tests per configuration and charts them side by side, so you can find the sweet spot for your card.</p>
+        <p>A built-in benchmark runs prompt and generation tests per configuration and charts them side by side. Every result names its workload, app version, engine and batch size, and the app says when two results are not like for like.</p>
       </li>
     </ul>
   </section>
@@ -115,8 +115,8 @@
   <section id="models" class="wrap section">
     <h2>What it actually runs</h2>
     <p class="section-lede">
-      Measured on a 2021 card — an RX 6700 XT with 12 GB — with the bundled engine, KV f16, <code>pp512</code> and <code>tg128</code>.
-      Your numbers will differ; the app records your own history so you can compare.
+      Measured with the XeonLLM 0.2.0 engine on the machine this fork is built for: a Mac Pro (Late 2013),
+      one FirePro D700 with 6 GB. Your numbers will differ; the app records your own history so you can compare.
     </p>
     <div class="card table-card">
       <table>
@@ -125,16 +125,18 @@
           <tr><th scope="col">Model</th><th scope="col">Type</th><th scope="col" class="num">Prompt</th><th scope="col" class="num">Generation</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Llama-3.2-1B Q4_K_M</th><td>dense</td><td class="num">5770</td><td class="num">254</td></tr>
-          <tr><th scope="row">Qwen3-8B Q4_K_M</th><td>dense</td><td class="num">851</td><td class="num">61</td></tr>
-          <tr><th scope="row">gemma-4-12B Q4_K_XL</th><td>dense</td><td class="num">534</td><td class="num">37</td></tr>
-          <tr><th scope="row">gpt-oss-20B Q4_K_M</th><td>MoE, all experts in VRAM</td><td class="num">1305</td><td class="num">94</td></tr>
-          <tr><th scope="row">Qwen3.6-14B-A3B Q5_K_M</th><td>MoE, all experts in VRAM</td><td class="num">1243</td><td class="num">67</td></tr>
-          <tr><th scope="row">Qwen3.6-35B-A3B Q4_K_S</th><td>MoE, <code>--n-cpu-moe 24</code></td><td class="num">475</td><td class="num">29</td></tr>
+          <tr><th scope="row">Qwen3-0.6B Q8_0</th><td>dense &sup1;</td><td class="num">&mdash;</td><td class="num">57.8</td></tr>
+          <tr><th scope="row">Qwen3-4B Q4_K_M</th><td>dense &sup1;</td><td class="num">&mdash;</td><td class="num">16.6</td></tr>
+          <tr><th scope="row">LFM3-1.7B F16</th><td>dense &sup2;</td><td class="num">287</td><td class="num">23.1</td></tr>
+          <tr><th scope="row">Ornith-1.0-35B Q6_K</th><td>MoE, Dynamic MoE, one card plus CPU &sup3;</td><td class="num">76.3&ndash;76.5</td><td class="num">15.3&ndash;15.4</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="table-note">Numbers vary with quant, context depth and cooling. Full tables, method and raw rows live in the repository README.</p>
+    <p class="table-note">All rows: XeonLLM 0.2.0 shipped engine (llama.cpp pin <code>d81235049</code>), second D700 (the card not driving the display). A dash means not measured.
+      &sup1; <code>llama-bench -ngl 99 -p 0 -n 128 -r 5 -fa 1</code>, llama-bench's own warm-up discarded, three processes: 0.6B 57.75 / 57.77 / 57.80, 4B 16.643 / 16.646 / 16.647.
+      &sup2; <code>llama-bench -ub 512 -b 512 -p 512 -n 128 -r 3 -fa 1</code>, warm-up discarded, two processes: prompt 287.01 / 286.81, generation 23.06 / 23.06.
+      &sup3; Ornith-1.0-35B is a Qwen3.6-35B-A3B fine-tune; the app's own one-card launch, <code>-c 16384 -ub 512 --dynamic-moe on</code>, real server requests, N=3, warm-up discarded.
+      Numbers vary with quant, context depth and cooling. Method and raw rows are in the <a href="https://github.com/SamerKharboush/xeonllm/releases/tag/v0.2.0" rel="noopener">0.2.0 release notes</a>.</p>
   </section>
 
   <section id="pricing" class="wrap section">
@@ -165,7 +167,7 @@
       </details>
       <details>
         <summary>What Mac do I need?</summary>
-        <p>macOS 14 or later on an Intel Mac with a discrete AMD GPU. The machine the fork is measured on is a Mac Pro (Late 2013): Xeon E5-2697 v2, 64 GB of RAM and two FirePro D700. Cards with 8 GB or more are the comfortable range; the app tells you what fits before you download.</p>
+        <p>macOS 14 or later on an Intel Mac with a discrete AMD GPU and a CPU with AVX (Sandy Bridge or later; AVX2 is not needed). The machine the fork is measured on is a Mac Pro (Late 2013): Xeon E5-2697 v2, 64 GB of RAM and two FirePro D700. Cards with 8 GB or more are the comfortable range; the app tells you what fits before you download.</p>
       </details>
       <details>
         <summary>Do my chats leave the machine?</summary>
@@ -182,6 +184,10 @@
       <details>
         <summary>Where does the download come from?</summary>
         <p>GitHub Releases on this repository. Builds are ad-hoc signed rather than notarised, so the first launch means right-clicking the app once and choosing Open.</p>
+      </details>
+      <details>
+        <summary>How do I update?</summary>
+        <p>From 0.2.0 the app checks for a new release once a day and on demand from its About page, then downloads and installs it for you. Before swapping anything it checks the download's checksum, that it is the same app and build variant, that the version is newer, and the code signature; if the swap fails, the old app is put back. Version 0.1.1 shipped with updates turned off, so moving from 0.1.1 to 0.2.0 is a one-time manual download.</p>
       </details>
     </div>
   </section>
@@ -202,7 +208,7 @@
   <div class="wrap foot-in">
     <p class="foot-brand">
       <img src="icon-48.png" alt="" width="22" height="22">
-      <span><strong>XeonLLM</strong> — free software under GPL-3.0. Built for Intel Macs with AMD GPUs.</span>
+      <span><strong>XeonLLM</strong> — free software under GPL-3.0. Built for Intel Macs with AMD GPUs. A fork of <a href="https://github.com/engeldlgado/toshllm" rel="noopener">ToshLLM</a> by Engelbert Delgado.</span>
     </p>
     <nav class="foot-links" aria-label="Repository">
       <a href="https://github.com/SamerKharboush/xeonllm" rel="noopener">Source</a>
