@@ -54,7 +54,7 @@
         <a class="btn solid big" href="https://github.com/SamerKharboush/xeonllm/releases/latest" rel="noopener">Download for Intel Macs</a>
         <a class="btn ghost big" href="https://github.com/SamerKharboush/xeonllm" rel="noopener">Read the source</a>
       </div>
-      <p class="fineprint">Version 0.2.1 &middot; <a href="https://github.com/SamerKharboush/xeonllm/releases/tag/v0.2.1" rel="noopener">release notes</a>. Free and open source under GPL-3.0. macOS 14 or later, x86_64 with an AVX CPU and a discrete AMD GPU.</p>
+      <p class="fineprint">Version 0.2.2 &middot; <a href="https://github.com/SamerKharboush/xeonllm/releases/tag/v0.2.2" rel="noopener">release notes</a>. Free and open source under GPL-3.0. macOS 14 or later, x86_64 with an AVX CPU and a discrete AMD GPU.</p>
     </div>
 
     <figure class="card hero-card">
@@ -136,7 +136,8 @@
       &sup1; <code>llama-bench -ngl 99 -p 0 -n 128 -r 5 -fa 1</code>, llama-bench's own warm-up discarded, three processes: 0.6B 57.75 / 57.77 / 57.80, 4B 16.643 / 16.646 / 16.647.
       &sup2; <code>llama-bench -ub 512 -b 512 -p 512 -n 128 -r 3 -fa 1</code>, warm-up discarded, two processes: prompt 287.01 / 286.81, generation 23.06 / 23.06.
       &sup3; Ornith-1.0-35B is a Qwen3.6-35B-A3B fine-tune; the app's own one-card launch, <code>-c 16384 -ub 512 --dynamic-moe on</code>, real server requests, N=3, warm-up discarded.
-      0.2.1 adds an opt-in setting and leaves the default engine path as in 0.2.0; its release gate measured Qwen3-4B at 16.645 tok/s with method &sup1;.
+      0.2.2 makes three wave64 decode improvements the default: Qwen3-8B Q4_K_M 10.22 -&gt; 14.74 tok/s and Qwen3-4B Q4_K_M 16.64 -&gt; 17.56 tok/s on one D700, same text (method &sup4;).
+      &sup4; 0.2.2 against 0.2.1's behaviour on the same engine, card 1, <code>llama-bench -ngl 99 -p 0 -n 128 -r 5 -fa 1</code>, warm-up discarded, 3 alternating rounds; the 0.2.1 arm sets the three opt-outs.
       Numbers vary with quant, context depth and cooling. Method and raw rows are in the <a href="https://github.com/SamerKharboush/xeonllm/releases/tag/v0.2.0" rel="noopener">0.2.0 release notes</a>.</p>
   </section>
 
